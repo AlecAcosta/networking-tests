@@ -21,7 +21,8 @@ func _on_id_changed(id: int):
 	LblID.text = str(id)
 
 func _on_BtnBack_pressed():
-	get_tree().network_peer = null
+	Network.peer.close_connection()
+#	get_tree().network_peer = null
 	get_tree().change_scene("res://Main.tscn")
 
 func _on_message_recieved(id: int, text: String):
