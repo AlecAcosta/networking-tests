@@ -13,11 +13,18 @@ margin_bottom = 14.0
 text = "Base Room"
 align = 1
 
-[node name="LblIP" type="Label" parent="."]
+[node name="LblID" type="Label" parent="."]
+anchor_right = 1.0
+margin_bottom = 14.0
+text = "ID"
+align = 2
+
+[node name="Label" type="Label" parent="."]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -14.0
+text = "Press SPACE to send a message"
 align = 1
 
 [node name="OutputLog" type="RichTextLabel" parent="."]

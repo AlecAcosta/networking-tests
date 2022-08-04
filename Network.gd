@@ -1,28 +1,31 @@
 extends Node
 
+signal player_has_joined
+signal message_recieved
+signal id_changed
+
+
 var peer
 var ip_address
-var id
+var id setget set_id
 
-signal connection_succeeded
-signal connection_failed
-signal peer_connected
-signal peer_disconnected
-signal server_disconnected
-signal message_recieved
+
+func set_id(value: int):
+	id = value
+	emit_signal("id_changed", id)
 
 
 func init_server():
 	peer = NetworkedMultiplayerENet.new()
-	peer.create_server(28960, 2)
+	peer.create_server(28960, 10)
 	get_tree().set_network_peer(peer)
 	
 	update_id()
 	
-	peer.connect("connection_succeeded", self, "_on_connection_succeeded")
-	peer.connect("connection_failed", self, "_on_connection_failed")
-	peer.connect("peer_connected", self, "_on_peer_connected")
-	peer.connect("peer_disconnected", self, "_on_peer_disconnected")
+#	peer.connect("connection_succeeded", self, "_on_connection_succeeded")
+#	peer.connect("connection_failed", self, "_on_connection_failed")
+#	peer.connect("peer_connected", self, "_on_peer_connected")
+#	peer.connect("peer_disconnected", self, "_on_peer_disconnected")
 
 func init_client():
 	for ip in IP.get_local_addresses():
@@ -40,24 +43,11 @@ func init_client():
 	peer.connect("server_disconnected", self, "_on_server_disconnected")
 
 func update_id():
-	id = get_tree().get_network_unique_id()
+	set_id(get_tree().get_network_unique_id())
 
 
-remote func recieve_message(id: int, text: String):
+remotesync func recieve_message(id: int, text: String):
 	emit_signal("message_recieved", id, text)
 
-
-func _on_connection_succeeded():
-	emit_signal("connection_succeeded")
-
-func _on_connection_failed():
-	emit_signal("connection_failed")
-
-func _on_peer_connected(id: int):
-	emit_signal("peer_connected", id)
-
-func _on_peer_disconnected(id: int):
-	emit_signal("peer_disconnected", id)
-
-func _on_server_disconnected():
-	emit_signal("server_disconnected")
+remotesync func player_has_joined_msg(id: int):
+	emit_signal("player_has_joined", id)
