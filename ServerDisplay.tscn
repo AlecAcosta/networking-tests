@@ -5,6 +5,7 @@
 [node name="ServerDisplay" type="Control" groups=["server display"]]
 margin_right = 300.0
 margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
 script = ExtResource( 1 )
 
 [node name="LblInfo" type="Label" parent="."]

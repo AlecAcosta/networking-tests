@@ -19,7 +19,10 @@ func set_id(value: int):
 
 
 func _ready():
-	current_player_username = OS.get_model_name()
+	current_player_username = OS.get_name()
+	
+	if not current_player_username in ["Windows"]:
+		current_player_username = OS.get_model_name()
 
 
 func init_server():
