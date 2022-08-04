@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ServerBrowser.gd" type="Script" id=1]
+[ext_resource path="res://ServerListener.tscn" type="PackedScene" id=2]
+
+[node name="ServerBrowser" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = -24.0
+margin_bottom = -24.0
+script = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+anchor_right = 1.0
+margin_bottom = 14.0
+text = "Searching lan games"
+align = 1
+valign = 1
+
+[node name="ServerList" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = -24.0
+margin_bottom = -24.0
+
+[node name="ServerListener" parent="." instance=ExtResource( 2 )]
+
+[node name="BtnBack" type="Button" parent="."]
+margin_right = 42.0
+margin_bottom = 40.0
+text = "Back"
+
+[connection signal="new_server" from="ServerListener" to="." method="_on_ServerListener_new_server"]
+[connection signal="remove_server" from="ServerListener" to="." method="_on_ServerListener_remove_server"]
+[connection signal="pressed" from="BtnBack" to="." method="_on_BtnBack_pressed"]

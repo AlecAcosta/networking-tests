@@ -29,3 +29,7 @@ func _on_message_recieved(id: int, text: String):
 
 func _on_player_has_joined(id: int):
 	output_print("   "+str(id)+" has joined")
+
+
+func _on_BtnSayHi_pressed():
+	pass

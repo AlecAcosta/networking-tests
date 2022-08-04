@@ -4,9 +4,12 @@ signal player_has_joined
 signal message_recieved
 signal id_changed
 
+const DEFAULT_PORT:= 28960
+
 
 var peer
 var ip_address
+var current_player_username:= "default"
 var id setget set_id
 
 
@@ -15,9 +18,13 @@ func set_id(value: int):
 	emit_signal("id_changed", id)
 
 
+func _ready():
+	current_player_username = OS.get_model_name()
+
+
 func init_server():
 	peer = NetworkedMultiplayerENet.new()
-	peer.create_server(28960, 10)
+	peer.create_server(DEFAULT_PORT, 10)
 	get_tree().set_network_peer(peer)
 	
 	update_id()
@@ -28,12 +35,8 @@ func init_server():
 #	peer.connect("peer_disconnected", self, "_on_peer_disconnected")
 
 func join_server():
-	for ip in IP.get_local_addresses():
-		if ip.begins_with("192.168.") and not ip.ends_with(".1"):
-			ip_address = ip
-	
 	peer = NetworkedMultiplayerENet.new()
-	peer.create_client(ip_address, 28960)
+	peer.create_client(ip_address, DEFAULT_PORT)
 	get_tree().set_network_peer(peer)
 	
 	update_id()

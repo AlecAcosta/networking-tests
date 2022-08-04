@@ -19,14 +19,6 @@ margin_bottom = 14.0
 text = "ID"
 align = 2
 
-[node name="Label" type="Label" parent="."]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -14.0
-text = "Press SPACE to send a message"
-align = 1
-
 [node name="OutputLog" type="RichTextLabel" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -44,8 +36,18 @@ anchor_bottom = 1.0
 color = Color( 0, 0, 0, 0.164706 )
 
 [node name="BtnBack" type="Button" parent="."]
-margin_right = 42.0
+margin_right = 60.0
 margin_bottom = 40.0
 text = "Back"
 
+[node name="BtnSayHi" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -60.0
+margin_top = -40.0
+text = "say hi"
+
 [connection signal="pressed" from="BtnBack" to="." method="_on_BtnBack_pressed"]
+[connection signal="pressed" from="BtnSayHi" to="." method="_on_BtnSayHi_pressed"]

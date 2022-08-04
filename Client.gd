@@ -8,10 +8,6 @@ func _ready():
 	Network.peer.connect("connection_succeeded", self, "_on_connection_succeeded")
 	Network.peer.connect("connection_failed", self, "_on_connection_failed")
 
-func _input(event):
-	if event.is_action_pressed("ui_accept"):
-		Network.rpc("recieve_message", Network.id, "hi, I'm a client")
-#		_on_message_recieved(Network.id, "hi, I'm a client")
 
 func _on_server_disconnected():
 	output_print("server disconnected")
@@ -21,3 +17,6 @@ func _on_connection_succeeded():
 
 func _on_connection_failed():
 	output_print("connection failed")
+
+func _on_BtnSayHi_pressed():
+	Network.rpc("recieve_message", Network.id, "hi, I'm a client")
