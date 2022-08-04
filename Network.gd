@@ -27,7 +27,7 @@ func init_server():
 #	peer.connect("peer_connected", self, "_on_peer_connected")
 #	peer.connect("peer_disconnected", self, "_on_peer_disconnected")
 
-func init_client():
+func join_server():
 	for ip in IP.get_local_addresses():
 		if ip.begins_with("192.168.") and not ip.ends_with(".1"):
 			ip_address = ip

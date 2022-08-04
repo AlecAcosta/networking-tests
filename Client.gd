@@ -2,7 +2,7 @@ extends "res://BaseRoom.gd"
 
 
 func _ready():
-	Network.init_client()
+	Network.join_server()
 	
 	Network.peer.connect("server_disconnected", self, "_on_server_disconnected")
 	Network.peer.connect("connection_succeeded", self, "_on_connection_succeeded")
