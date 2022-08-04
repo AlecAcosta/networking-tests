@@ -25,11 +25,11 @@ func _ready():
 	else:
 		print("GameServer LAN service: Listening on port: " + str(listen_port))
 
-func _process(delta):
+func _physics_process(delta):
 	if socket_udp.get_available_packet_count() > 0:
+		var array_bytes = socket_udp.get_packet()
 		var server_ip = socket_udp.get_packet_ip()
 		var server_port = socket_udp.get_packet_port()
-		var array_bytes = socket_udp.get_packet()
 		
 		if server_ip != '' and server_port > 0:
 			if not known_servers.has(server_ip):
@@ -40,6 +40,7 @@ func _process(delta):
 				known_servers[server_ip] = gameInfo
 				emit_signal("new_server", gameInfo)
 				print(socket_udp.get_packet_ip())
+				print(known_servers)
 			else:
 				var gameInfo = known_servers[server_ip]
 				gameInfo.lastSeen = OS.get_unix_time()
